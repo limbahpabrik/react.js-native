@@ -1,4 +1,4 @@
-const foodMenu = [
+const FoodMenu = [
 	{
 		nama: "Nasi Goreng",
 		deskripsi: "Nasi yang digoreng dengan bumbu rempah khas Indonesia",
@@ -68,4 +68,4 @@ const foodMenu = [
 	},
 ];
 
-export default foodMenu;
+export default FoodMenu;
