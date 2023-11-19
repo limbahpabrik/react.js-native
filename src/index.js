@@ -23,38 +23,41 @@ function Header() {
 }
 
 function Menu() {
-	const food = [];
-	// const food = data;
+	// const food = [];
+	const food = data;
 	const numsFood = food.length;
 
 	return (
-		<main className="menu">
-			<h2>Menu Kita</h2>
-			{numsFood > 0 ? (
-				<ul className="foods">
-					{data.map((food) => (
-						<Food item={food} />
-					))}
-				</ul>
-			) : (
-				<p>Warung Sudah Tutup</p>
-			)}
-		</main>
+		<>
+			<main className="menu">
+				<h2>Menu Kita</h2>
+				{numsFood > 0 ? (
+					<ul className="food">
+						{data.map((food) => (
+							<Food item={food} />
+						))}
+					</ul>
+				) : (
+					<p>Warung Sudah Tutup</p>
+				)}
+			</main>
+		</>
 	);
 }
 
 function Food(props) {
+	const { nama, deskripsi, foto, harga, stok } = props.item;
+
 	return (
 		<>
-			<img
-				src={props.item.foto}
-				alt={props.item.nama}
-				width={100}
-				height={80}
-			/>
-			<h2>{props.item.nama}</h2>
-			<p>{props.item.deskripsi}</p>
-			<span>{props.item.harga}</span>
+			<li className={`food ${!stok ? "sold-out" : ""}`}>
+				<img src={foto} alt={nama} width={100} height={80} />
+				<div>
+					<h2>{nama}</h2>
+					<p>{deskripsi}</p>
+					<span>{stok ? harga : "Habis"}</span>
+				</div>
+			</li>
 		</>
 	);
 }
@@ -73,13 +76,13 @@ function Footer() {
 	}
 }
 
-function FooterOpen(props) {
+function FooterOpen({ buka, tutup }) {
 	return (
 		<footer className="footer">
 			<div className="order">
 				<p>
-					{new Date().getFullYear()} - Warung Mang Ujo - Buka Pukul:{" "}
-					{props.buka}-{props.tutup}
+					{new Date().getFullYear()} - Warung Mang Ujo - Buka Pukul: {buka}-
+					{tutup}
 				</p>
 				<button className="btn">Order</button>
 			</div>
@@ -87,12 +90,12 @@ function FooterOpen(props) {
 	);
 }
 
-function FooterClosed(props) {
+function FooterClosed({ buka, tutup }) {
 	return (
 		<footer className="footer">
 			<p>
-				{new Date().getFullYear()} - Warung Mang Ujo - Buka Pukul: {props.buka}-
-				{props.tutup}
+				{new Date().getFullYear()} - Warung Mang Ujo - Buka Pukul: {buka}-
+				{tutup}
 			</p>
 		</footer>
 	);
